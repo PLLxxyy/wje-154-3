@@ -27,6 +27,9 @@ export const Header: React.FC<Props> = ({ currentPage, onNavigate, currentUser, 
               <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('favorites'); }} style={currentPage === 'favorites' ? { color: '#b8860b', fontWeight: 600 } : {}}>
                 收藏
               </a>
+              <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('materials'); }} style={currentPage === 'materials' ? { color: '#b8860b', fontWeight: 600 } : {}}>
+                材料库
+              </a>
               <a href="#" onClick={(e) => { e.preventDefault(); onNavigate('profile'); }}>
                 <img src={currentUser.avatar} alt="" className="user-avatar-small" title={currentUser.name} />
               </a>

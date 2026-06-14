@@ -184,6 +184,49 @@
       .back-link { display: inline-flex; align-items: center; gap: 4px; font-size: 14px; color: #888; margin-bottom: 16px; cursor: pointer; }
       .back-link:hover { color: #b8860b; }
       .loading-spinner { text-align: center; padding: 40px; color: #999; }
+
+      /* ===== Material Comparison ===== */
+      .material-summary { margin-bottom: 12px; }
+      .summary-bar { height: 6px; background: #f0ece4; border-radius: 3px; overflow: hidden; margin-bottom: 8px; }
+      .summary-fill { height: 100%; background: linear-gradient(90deg, #b8860b, #d4a843); border-radius: 3px; transition: width .4s ease; }
+      .summary-text { display: flex; justify-content: space-between; font-size: 12px; }
+      .owned-text { color: #388e3c; font-weight: 500; }
+      .missing-text { color: #e74c3c; font-weight: 500; }
+      .all-ready-text { color: #388e3c; font-weight: 600; }
+      .material-status { margin-right: 6px; font-size: 12px; }
+      .material-item.material-owned { background: #f0f8f0; border-radius: 4px; padding-left: 8px; }
+      .material-item.material-missing { background: #fff0f0; border-radius: 4px; padding-left: 8px; }
+
+      /* ===== My Materials Page ===== */
+      .my-materials-page { max-width: 720px; margin: 0 auto; }
+      .my-materials-page h2 { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+      .inventory-add-card { background: #fff; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+      .inventory-add-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: #b8860b; }
+      .inventory-form { display: flex; flex-direction: column; gap: 12px; }
+      .category-toggle { display: flex; gap: 8px; }
+      .toggle-btn { flex: 1; padding: 8px 16px; border-radius: 8px; font-size: 14px; background: #f0ece4; color: #888; transition: all .2s; border: 2px solid transparent; }
+      .toggle-btn.active { background: #fff8e8; color: #b8860b; border-color: #b8860b; font-weight: 500; }
+      .toggle-btn:hover { background: #e8e0d0; }
+      .btn-add-inventory { padding: 10px 24px; background: #b8860b; color: #fff; border-radius: 20px; font-size: 14px; font-weight: 500; transition: background .2s; align-self: flex-end; }
+      .btn-add-inventory:hover { background: #9a7209; }
+      .btn-add-inventory:disabled { background: #ccc; cursor: not-allowed; }
+      .inventory-stats { display: flex; gap: 12px; margin-bottom: 20px; }
+      .stat-card { flex: 1; background: #fff; border-radius: 12px; padding: 16px; text-align: center; box-shadow: 0 1px 4px rgba(0,0,0,.05); }
+      .stat-num { display: block; font-size: 24px; font-weight: 700; color: #b8860b; }
+      .stat-label { font-size: 12px; color: #999; }
+      .inventory-filter { display: flex; gap: 8px; margin-bottom: 16px; }
+      .filter-chip { padding: 6px 16px; border-radius: 16px; font-size: 13px; background: #f0ece4; color: #666; border: 1px solid transparent; transition: all .2s; cursor: pointer; }
+      .filter-chip.active { background: #b8860b; color: #fff; border-color: #b8860b; }
+      .filter-chip:hover { background: #e8e0d0; }
+      .inventory-list { display: flex; flex-direction: column; gap: 8px; }
+      .inventory-item { display: flex; align-items: center; gap: 12px; background: #fff; border-radius: 10px; padding: 14px 16px; box-shadow: 0 1px 4px rgba(0,0,0,.05); transition: transform .15s; }
+      .inventory-item:hover { transform: translateX(2px); }
+      .inventory-icon { font-size: 20px; flex-shrink: 0; }
+      .inventory-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+      .inventory-name { font-size: 14px; font-weight: 500; color: #333; }
+      .inventory-note { font-size: 12px; color: #999; }
+      .btn-remove-inventory { padding: 4px 12px; border-radius: 12px; font-size: 12px; color: #e74c3c; background: none; border: 1px solid #f5c6c6; transition: all .2s; }
+      .btn-remove-inventory:hover { background: #fce4ec; border-color: #e74c3c; }
     </style>
   </head>
   <body>

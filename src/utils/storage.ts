@@ -1,9 +1,10 @@
-import type { Work, Author, CurrentUser } from '../types';
+import type { Work, Author, CurrentUser, InventoryItem } from '../types';
 
 const KEYS = {
   works: 'craft_works',
   authors: 'craft_authors',
   user: 'craft_current_user',
+  inventory: 'craft_inventory',
 };
 
 function read<T>(key: string): T | null {
@@ -80,4 +81,39 @@ export function setCurrentUser(user: CurrentUser): void {
 
 export function clearCurrentUser(): void {
   localStorage.removeItem(KEYS.user);
+}
+
+/* Inventory */
+export function getInventory(): InventoryItem[] {
+  return read<InventoryItem[]>(KEYS.inventory) || [];
+}
+
+export function saveInventory(items: InventoryItem[]): void {
+  write(KEYS.inventory, items);
+}
+
+export function addInventoryItem(item: InventoryItem): void {
+  const items = getInventory();
+  items.push(item);
+  saveInventory(items);
+}
+
+export function removeInventoryItem(id: string): void {
+  const items = getInventory().filter((i) => i.id !== id);
+  saveInventory(items);
+}
+
+export function updateInventoryItem(updated: InventoryItem): void {
+  const items = getInventory();
+  const idx = items.findIndex((i) => i.id === updated.id);
+  if (idx !== -1) {
+    items[idx] = updated;
+    saveInventory(items);
+  }
+}
+
+export function isMaterialOwned(materialName: string): boolean {
+  const items = getInventory();
+  const lower = materialName.toLowerCase();
+  return items.some((i) => lower.includes(i.name.toLowerCase()) || i.name.toLowerCase().includes(lower));
 }

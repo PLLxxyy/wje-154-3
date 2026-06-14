@@ -12,6 +12,7 @@ import { WorkDetail } from './pages/WorkDetail';
 import { PublishWork } from './pages/PublishWork';
 import { Profile } from './pages/Profile';
 import { Favorites } from './pages/Favorites';
+import { MyMaterials } from './pages/MyMaterials';
 
 const PLACEHOLDER_COLORS = [
   '#f4e1d2', '#d4e2d4', '#d2d4f4', '#f4d2e2',
@@ -25,7 +26,7 @@ function makeAvatar(seed: number, emoji: string): string {
   )}`;
 }
 
-type Page = 'home' | 'detail' | 'publish' | 'profile' | 'favorites';
+type Page = 'home' | 'detail' | 'publish' | 'profile' | 'favorites' | 'materials';
 
 const App: React.FC = () => {
   const [page, setPage] = useState<Page>('home');
@@ -211,6 +212,12 @@ const App: React.FC = () => {
             authors={authors}
             currentUser={currentUser}
             onOpenWork={handleOpenWork}
+          />
+        );
+      case 'materials':
+        return (
+          <MyMaterials
+            onNavigate={(p) => navigate(p)}
           />
         );
       default:

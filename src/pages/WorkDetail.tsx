@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import type { Work, Author, CurrentUser } from '../types';
 import { AuthorCard } from '../components/AuthorCard';
 import { CommentSection } from '../components/CommentSection';
+import { isMaterialOwned, getInventory } from '../utils/storage';
 
 interface Props {
   work: Work;
@@ -21,6 +22,20 @@ export const WorkDetail: React.FC<Props> = ({
   const isFavorited = currentUser ? work.favorites.includes(currentUser.id) : false;
 
   const diffClass = work.difficulty === '简单' ? 'easy' : work.difficulty === '中等' ? 'medium' : 'hard';
+
+  const inventoryList = getInventory();
+  const hasInventory = inventoryList.length > 0;
+
+  const ownershipMap = useMemo(() => {
+    const map = new Map<string, boolean>();
+    work.materials.forEach((m) => {
+      map.set(m.name, isMaterialOwned(m.name));
+    });
+    return map;
+  }, [work.materials]);
+
+  const ownedCount = work.materials.filter((m) => ownershipMap.get(m.name)).length;
+  const missingCount = work.materials.length - ownedCount;
 
   return (
     <div>
@@ -80,12 +95,30 @@ export const WorkDetail: React.FC<Props> = ({
 
           <div className="sidebar-card">
             <h3>材料清单</h3>
-            {work.materials.map((m, i) => (
-              <div key={i} className="material-item">
-                <span>{m.name}</span>
-                <span style={{ color: '#b8860b' }}>{m.amount}</span>
+            {hasInventory && (
+              <div className="material-summary">
+                <div className="summary-bar">
+                  <div className="summary-fill" style={{ width: `${(ownedCount / work.materials.length) * 100}%` }} />
+                </div>
+                <div className="summary-text">
+                  <span className="owned-text">已有 {ownedCount} 项</span>
+                  {missingCount > 0 && <span className="missing-text">缺少 {missingCount} 项</span>}
+                  {missingCount === 0 && <span className="all-ready-text">材料齐全 ✅</span>}
+                </div>
               </div>
-            ))}
+            )}
+            {work.materials.map((m, i) => {
+              const owned = ownershipMap.get(m.name);
+              return (
+                <div key={i} className={`material-item ${hasInventory ? (owned ? 'material-owned' : 'material-missing') : ''}`}>
+                  <span>
+                    {hasInventory && <span className="material-status">{owned ? '✅' : '❌'}</span>}
+                    {m.name}
+                  </span>
+                  <span style={{ color: '#b8860b' }}>{m.amount}</span>
+                </div>
+              );
+            })}
           </div>
 
           <div className="sidebar-card">

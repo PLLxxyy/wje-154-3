@@ -48,6 +48,13 @@ export interface Comment {
   createdAt: number;
 }
 
+export interface InventoryItem {
+  id: string;
+  name: string;
+  category: 'tool' | 'consumable';
+  note: string;
+}
+
 export interface CurrentUser {
   id: string;
   name: string;
